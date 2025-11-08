@@ -128,7 +128,7 @@ npm start
 | ------ | -------------------- | ------------------------------------------------- | ---------- |
 | POST   | `/api/auth/login`    | Login with username & password, returns JWT token | All        |
 | POST   | `/api/auth/register` | Register a new user       | Admin/User |
-| POST   | `/api/auth/register-admin` | Register a new user       | Admin |
+| POST   | `/api/auth/register-admin` | Register a new admin       | Admin |
 
 
 ---
@@ -140,7 +140,7 @@ npm start
 | GET    | `/api/stocks/getAllStocks`     | Retrieve all stocks        | Admin/User |
 | GET    | `/api/stocks/getStock/{id}`    | Get a specific stock by ID | Admin/User |
 | POST   | `/api/stocks/createStock`      | Create a new stock         | Admin      |
-| PATCH  | `/api/stocks/updateStock/{id}` | Update stock price or info | Admin      |
+| PATCH  | `/api/stocks/updateStock/{id}` | Update stock price         | Admin      |
 | DELETE | `/api/stocks/deleteStock/{id}` | Delete a stock             | Admin      |
 
 ---
@@ -152,7 +152,7 @@ npm start
 | GET    | `/api/exchanges/getAllExchanges`     | Get all stock exchanges                                | Admin/User |
 | GET    | `/api/exchanges/getExchange/{id}`    | Get a specific stock exchange by ID                    | Admin/User |
 | POST   | `/api/exchanges/createExchange`      | Create a new exchange                                  | Admin      |
-| PATCH  | `/api/exchanges/updateExchange/{id}` | Update exchange info (name, description, liveInMarket) | Admin      |
+| PATCH  | `/api/exchanges/updateExchange/{id}` | Update exchange info                                   | Admin      |
 | DELETE | `/api/exchanges/deleteExchange/{id}` | Delete a stock exchange                                | Admin      |
 
 ---
