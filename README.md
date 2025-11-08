@@ -1,4 +1,3 @@
-
 # 📈 Stock Exchange System
 
 A full-stack demo application for managing stocks and stock exchanges.  
@@ -119,14 +118,53 @@ npm start
 
 ---
 
-## 🧾 Example API Endpoints
+## 🧾 API Endpoints
 
-| Method | Endpoint                | Description                  |
-|--------|------------------------|------------------------------|
-| GET    | `/api/stocks/getAllStocks` | Get all stocks               |
-| GET    | `/api/exchanges/getAllExchanges` | Get all stock exchanges  |
-| POST   | `/api/auth/login`       | Login with username/password |
-| POST   | `/api/stocks/createStock` | Create new stock (admin only) |
+---
+
+### **Authentication**
+
+| Method | Endpoint             | Description                                       | Access     |
+| ------ | -------------------- | ------------------------------------------------- | ---------- |
+| POST   | `/api/auth/login`    | Login with username & password, returns JWT token | All        |
+| POST   | `/api/auth/register` | Register a new user       | Admin/User |
+| POST   | `/api/auth/register-admin` | Register a new user       | Admin |
+
+
+---
+
+### **Stocks**
+
+| Method | Endpoint                       | Description                | Access     |
+| ------ | ------------------------------ | -------------------------- | ---------- |
+| GET    | `/api/stocks/getAllStocks`     | Retrieve all stocks        | Admin/User |
+| GET    | `/api/stocks/getStock/{id}`    | Get a specific stock by ID | Admin/User |
+| POST   | `/api/stocks/createStock`      | Create a new stock         | Admin      |
+| PATCH  | `/api/stocks/updateStock/{id}` | Update stock price or info | Admin      |
+| DELETE | `/api/stocks/deleteStock/{id}` | Delete a stock             | Admin      |
+
+---
+
+### **Stock Exchanges**
+
+| Method | Endpoint                             | Description                                            | Access     |
+| ------ | ------------------------------------ | ------------------------------------------------------ | ---------- |
+| GET    | `/api/exchanges/getAllExchanges`     | Get all stock exchanges                                | Admin/User |
+| GET    | `/api/exchanges/getExchange/{id}`    | Get a specific stock exchange by ID                    | Admin/User |
+| POST   | `/api/exchanges/createExchange`      | Create a new exchange                                  | Admin      |
+| PATCH  | `/api/exchanges/updateExchange/{id}` | Update exchange info (name, description, liveInMarket) | Admin      |
+| DELETE | `/api/exchanges/deleteExchange/{id}` | Delete a stock exchange                                | Admin      |
+
+---
+
+### **Exchange-Stocks (assign/remove stocks from exchanges)**
+
+| Method | Endpoint                                            | Description                           | Access     |
+| ------ | --------------------------------------------------- | ------------------------------------- | ---------- |
+| POST   | `/api/exchanges/{exchangeId}/addStock/{stockId}`    | Add a stock to an exchange            | Admin      |
+| DELETE | `/api/exchanges/{exchangeId}/removeStock/{stockId}` | Remove a stock from an exchange       | Admin      |
+| GET    | `/api/exchanges/{exchangeId}/stocks`                | Get all stocks in a specific exchange | Admin/User |
+
 
 ---
 
