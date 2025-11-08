@@ -1,2 +1,170 @@
-# stock-exchange-app
- Stock Exchange Management app
+
+# 📈 Stock Exchange System
+
+A full-stack demo application for managing stocks and stock exchanges.  
+Built with **Spring Boot (Java)**, **React**, and **MySQL**, fully containerized with **Docker Compose**.
+
+---
+
+## 🗂️ Project Structure
+
+```
+Task/
+├── Backend/
+│   └── stock-exchange/           # Spring Boot backend
+│       ├── src/
+│       ├── pom.xml
+│       └── Dockerfile
+├── Frontend/
+│   └── stock-exchange-frontend2/ # React frontend
+│       ├── src/
+│       ├── package.json
+│       └── Dockerfile
+├── init-db.sql                   # Database initialization script
+└── docker-compose.yml            # Compose file for full stack
+```
+
+---
+
+## ⚙️ Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Git](https://git-scm.com/downloads)
+
+> You don’t need Java, Maven, or Node installed locally — Docker handles everything.
+
+---
+
+## 🚀 Run the Full Stack Application
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/Abdalrhman74/stock-exchange-app.git
+cd stock-exchange-app
+```
+
+2. **Run Docker Compose:**
+
+```bash
+docker-compose up --build
+```
+
+> The first build may take a few minutes as it downloads dependencies.
+
+3. **Access the apps:**
+
+- Frontend (React UI): [http://localhost:3000](http://localhost:3000)  
+- Backend API (Spring Boot): [http://localhost:8080](http://localhost:8080)  
+- Database (MySQL) — localhost:3306  
+  - Username: `root`  
+  - Password: `12345`  
+  - Database: `stock_exchange_db`  
+
+---
+
+## 🧩 Initialization Resources
+
+The database is automatically initialized using `init-db.sql`:
+
+- Creates tables: `users`, `stocks`, `stock_exchanges`, `exchange_stocks`
+- Inserts sample data for stocks, exchanges, and relationships  
+
+> You can edit `init-db.sql` in the project root if needed.
+
+---
+
+## 🛠️ Backend (Spring Boot)
+
+- **Path:** `Backend/stock-exchange`  
+- **Tech Stack:** Spring Boot, Spring Security, JPA, MySQL  
+- **Port:** `8080`  
+
+### Build manually (optional)
+
+```bash
+cd Backend/stock-exchange
+mvn clean package -DskipTests
+java -jar target/*.jar
+```
+
+---
+
+## 💻 Frontend (React)
+
+- **Path:** `Frontend/stock-exchange-frontend2`  
+- **Port:** `3000`  
+
+### Build manually (optional)
+
+```bash
+cd Frontend/stock-exchange-frontend2
+npm install
+npm start
+```
+
+---
+
+## 🧰 Docker Compose Details
+
+`docker-compose.yml` defines three services:
+
+| Service    | Image / Build Path                | Description               | Port |
+|------------|----------------------------------|---------------------------|------|
+| **db**      | `mysql:8.0`                      | MySQL database            | 3306 |
+| **backend** | `./Backend/stock-exchange`       | Spring Boot app (API)     | 8080 |
+| **frontend**| `./Frontend/stock-exchange-frontend2` | React app served by Nginx | 3000 |
+
+> Each container communicates internally via service names (`db`, `backend`, `frontend`).
+
+---
+
+## 🧾 Example API Endpoints
+
+| Method | Endpoint                | Description                  |
+|--------|------------------------|------------------------------|
+| GET    | `/api/stocks/getAllStocks` | Get all stocks               |
+| GET    | `/api/exchanges/getAllExchanges` | Get all stock exchanges  |
+| POST   | `/api/auth/login`       | Login with username/password |
+| POST   | `/api/stocks/createStock` | Create new stock (admin only) |
+
+---
+
+## 🔑 Default Credentials
+
+| Role  | Username | Password  |
+|-------|----------|-----------|
+| Admin | admin    | admin123  |
+
+---
+
+## 🧹 Clean Up
+
+Stop and remove all containers:
+
+```bash
+docker-compose down
+```
+
+Remove volumes and reset the database:
+
+```bash
+docker-compose down -v
+```
+
+---
+
+## ✅ Summary
+
+After cloning the repo and running:
+
+```bash
+docker-compose up --build
+```
+
+You will have:
+
+- A MySQL DB seeded with demo data
+- A Spring Boot backend on port 8080
+- A React frontend on port 3000
+- Full CRUD functionality for stocks and exchanges
