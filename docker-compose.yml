@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: stock-exchange-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: stock_exchange_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  backend:
+    build: ./Backend/stock-exchange
+    container_name: stock-exchange-backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/stock_exchange_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345
+      JWT_SECRET: Yx9K3x5nBq2vD8eR5uJ1wM7pT9zQ4rX6sV8yA2cF3gH0jK5mN7bL1tR3vW9yE2uP
+      JWT_EXPIRATION: 3600000
+      APP_ADMIN_USERNAME: admin
+      APP_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./Frontend/stock-exchange-frontend2
+    container_name: stock-exchange-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  db_data:
